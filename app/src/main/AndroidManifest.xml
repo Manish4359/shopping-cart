@@ -12,7 +12,14 @@
         android:theme="@style/Theme.ShoppingCart"
         tools:targetApi="31">
         <activity
-            android:name=".BottomNavigationBar"
+            android:name=".SignUp"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreen"
             android:exported="true" >
 
             <intent-filter>
@@ -22,10 +29,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".BottomNavigationBar"
             android:exported="true">
 
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

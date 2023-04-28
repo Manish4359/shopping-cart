@@ -1,59 +1,66 @@
 package com.example.shoppingcart
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView.RecyclerListener
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.shoppingcart.adapters.CategoryTypeAdapter
+import com.example.shoppingcart.model.CategoryType
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Home.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Home : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var recyclerView: RecyclerView
+    lateinit var arrayList: ArrayList<CategoryType>
+    lateinit var gridLayoutManager: GridLayoutManager
+    lateinit var categoryTypeAdapter: CategoryTypeAdapter
 
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+        var view= inflater.inflate(R.layout.fragment_home, container, false)
+        recyclerView=view.findViewById(R.id.categoryTypeRecyclerView)
+        gridLayoutManager= GridLayoutManager(requireContext(),2,LinearLayoutManager.VERTICAL,false)
+        recyclerView.layoutManager=gridLayoutManager
+       // recyclerView.setHasFixedSize(true)
+        arrayList=getItemsData()
+        categoryTypeAdapter=CategoryTypeAdapter(requireContext(),arrayList)
+        recyclerView.adapter=categoryTypeAdapter
+
+        categoryTypeAdapter.onItemClickListener(object :CategoryTypeAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+
+                Toast.makeText(context,"clicked",Toast.LENGTH_SHORT).show()
+                val transaction=requireActivity().supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.home_framelayout,Items())
+                transaction.commit()
+
+            }
+        })
+
+        return view
+    }
+    private fun getItemsData():ArrayList<CategoryType>{
+        var items:ArrayList<CategoryType> = ArrayList()
+
+        items.add(CategoryType(R.drawable.fruits,"Food"))
+        items.add(CategoryType(R.drawable.shoes,"Shoes"))
+        items.add(CategoryType(R.drawable.electronics,"Laptops"))
+        items.add(CategoryType(R.drawable.mobiles,"Mobiles"))
+
+        return  items
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Home.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Home().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
