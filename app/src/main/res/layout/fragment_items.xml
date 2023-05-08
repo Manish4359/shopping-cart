@@ -6,10 +6,45 @@
     tools:context=".Items">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="25dp"
-        android:text=" Items list" />
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:padding="15dp"
+            android:src="@drawable/ic_back" />
+
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/itemsRecyclerView"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/categories_border"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:paddingTop="30dp"
+
+            />
+    </LinearLayout>
+
+
 
 </FrameLayout>

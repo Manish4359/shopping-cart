@@ -12,10 +12,18 @@ class Login : AppCompatActivity() {
 
 
         var signup=findViewById<Button>(R.id.signup)
+        var login=findViewById<Button>(R.id.btn_login)
+
+        login.setOnClickListener {
+            var intent= Intent(this,BottomNavigationBar::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         signup.setOnClickListener {
             var intent= Intent(this,SignUp::class.java)
             startActivity(intent)
+
         }
     }
 }
