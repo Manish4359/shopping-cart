@@ -18,7 +18,6 @@ class SignUp : AppCompatActivity() {
             var intent= Intent(this,BottomNavigationBar::class.java)
             startActivity(intent)
             finish()
-
         }
     }
 }

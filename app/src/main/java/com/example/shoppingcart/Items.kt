@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
@@ -42,23 +43,26 @@ class Items : Fragment() {
         recyclerView.adapter=itemsAdapter
 
         itemsAdapter.onItemClickListener(object :ItemsAdapter.onItemClickListener{
-            override fun onItemClick(position: Int) {
 
-                Toast.makeText(context,"clicked",Toast.LENGTH_SHORT).show()
+
+            override fun onItemClick(position: Int) {
+                //Toast.makeText(context,arrayList[position].name,Toast.LENGTH_SHORT).show()
             }
+
         })
 
 
 
         var back=view.findViewById<ImageButton>(R.id.back)
 
-
-
         back.setOnClickListener{
             val transaction=requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.frame_layout,Home())
             transaction.commit()
         }
+
+
+
         return view
     }
 
